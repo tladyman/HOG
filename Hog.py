@@ -10,11 +10,14 @@ class Hog:
         _inputImage (numpy.ndarray): The raw unprocessed input image.
 
     """
-    def __init__(self, filename, blockSizeX, blockSizeY, overlap, cellSizeX, cellSizeY):
+
+    def __init__(self, filename, nBlocksX, nBlocksY, blockSizeX, blockSizeY, overlap, cellSizeX, cellSizeY):
         """Constructor from an input image.
 
         Args:
             filename: Filename of input image e.g. 'test.png'.
+            nBlocksX: Number of Blocks on the x axis of the image
+            nBlocksY: Number of Blocks on the y axis of the image
             blockSizeX: The number of cells on the x axis of the Blocks. The
                 size in pixels is blockSizeX*cellSizeX
             blockSizeY: The number of cells on the y axis of the Blocks. The
@@ -31,6 +34,4 @@ class Hog:
         plt.imshow(self._inputImage, cmap=plt.cm.gray)
         plt.show()
 
-        # Create the Blocks
-
-        
+        # Create the Blocks and store in a 2D array/list in this object

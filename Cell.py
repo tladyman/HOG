@@ -1,6 +1,7 @@
 from scipy import misc
 from Histogram import Histogram
 
+
 class Cell:
     """A container object to manage the cells. These are squares of pixels.
 

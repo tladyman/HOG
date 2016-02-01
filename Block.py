@@ -1,4 +1,5 @@
 from scipy import misc
+from Cell import Cell
 
 
 class Block:
@@ -8,6 +9,7 @@ class Block:
         _pixelArray (numpy.ndarray): The arrays of pixels.
 
     """
+
     def __init__(self, pixelArray, blockSizeX, blockSizeY, overlap, cellSizeX, cellSizeY, xpos, ypos):
         """Constructor from an input array. Array should be 2x2 etc.
 
@@ -27,4 +29,4 @@ class Block:
         """
         self._pixelArray = pixelArray
 
-        # Create the cells
+        # Create the cells and store in a 2D array/list in this object
