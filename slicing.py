@@ -1,5 +1,5 @@
-def get_dense_patches(image, patch_size = 8, sample_rate = 4):
-    """Gets dense patches of pixels from an image.
+def get_dense_patches(image, patch_size = 16, sample_rate = 8):
+    """Gets patches of pixels from an array
 
     This uses the view_as_windows function from scikit-image.
 

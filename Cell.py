@@ -13,7 +13,7 @@ class Cell:
     histogram = Histogram()
 
     def __init__(self, pixelArray, cellSizeX, cellSizeY):
-        """Constructor from an input array. Array should be 2x2 etc.
+        """Constructor from an input array, this should be a block object. Array should be 2x2 etc.
 
         Args:
             pixelArray: The array of pixels.
@@ -21,4 +21,4 @@ class Cell:
             cellSizeY: The number of pixels on the y axis of this Cell.
 
         """
-        self._pixelArray = pixelArray
+        self._block = pixelArray

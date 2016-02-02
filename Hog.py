@@ -1,5 +1,6 @@
 from scipy import ndimage
 from scipy import misc
+import numpy as np
 import matplotlib.pyplot as plt
 
 
@@ -31,5 +32,41 @@ class Hog:
         self._inputImage = misc.imread(filename)
         plt.imshow(self._inputImage, cmap=plt.cm.gray)
         plt.show()
+
+
+    def _create_gradient_images(self,pixelArray):
+        """Creates gradient images in x and y directions.
+
+        Args:
+            pixelArray: The array of pixels
+
+        Returns:
+            grad: gradient image 
+            mag: gradient in the y direction
+        """
+
+        # Create the column and row vectors to convolve
+
+        ker = np.array([1,0,-1])
+
+        column = ker.reshape((3,1))
+        row = ker.reshape((1,3))
+
+        # mode = constant ensures that the edges of the image ar padded with constant values
+        # in this case the default is 0 - perfect for our purposes. The array is then restored
+        # to its original dimensions.
+
+        # Convolve the vectors to create gradients in x and y directions
+
+        gx = ndimage.filters.convolve(pixelArray, row, mode = "constant")
+        gy = ndimage.filters.convolve(pixelArray, column, mode = "constant")
+
+        # Create gradient image using arctan2 (remember its in radians!)
+        grad = np.arctan2(gy,gx)
+
+        # The square of each element is just matrix^2 in python
+        mag = np.sqrt(gx**2 + gy**2)
+
+        return grad, mag
 
         # Create the Blocks and store in a 2D array/list in this object
