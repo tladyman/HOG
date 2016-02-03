@@ -16,7 +16,8 @@ class Hog:
         """Constructor from an input image.
 
         Args:
-            filename: Filename of input image e.g. 'test.png'.
+            filename: Filename of input image e.g. 'test.png'. 
+                It also takes a numpy array
             blockSizeX: The number of cells on the x axis of the Blocks. The
                 size in pixels is blockSizeX*cellSizeX
             blockSizeY: The number of cells on the y axis of the Blocks. The
@@ -28,10 +29,15 @@ class Hog:
                 this Block.
 
         """
-        # load the image
-        self._inputImage = misc.imread(filename)
+        if type(filename) == str:
+            # load the image
+            self._inputImage = misc.imread(filename)
+        else:
+            self._inputImage = filename
+
         plt.imshow(self._inputImage, cmap=plt.cm.gray)
         plt.show()
+
 
 
     def _create_gradient_images(self,pixelArray):
