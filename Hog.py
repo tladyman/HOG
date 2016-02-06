@@ -39,6 +39,8 @@ class Hog:
         # plt.imshow(self._inputImage, cmap=plt.cm.gray, interpolation="nearest")
         # plt.show()
 
+        # Check if cell shape is compatible with blocks if not raise error
+
 
 
     def _create_gradient_images(self,pixelArray):
