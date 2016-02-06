@@ -1,3 +1,5 @@
+import numpy as np
+
 class Histogram:
     """The histogram and associated methods.
 

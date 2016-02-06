@@ -1,3 +1,4 @@
+import numpy as np
 from scipy import misc
 from skimage.util import view_as_blocks
 from Histogram import Histogram
@@ -11,8 +12,6 @@ class Cell:
         cellArray: The array of cells to have 
     """
 
-    histogram = Histogram()
-
     def __init__(self, blockArray, cellSizeX, cellSizeY):
         """Constructor from an input array, this should be a block object.
 
@@ -21,7 +20,7 @@ class Cell:
             cellSizeX: The number of pixels on the x axis of this Cell.
             cellSizeY: The number of pixels on the y axis of this Cell.
         """
-        self._blockArray = The array of blocks
+        self._blockArray = blockArray
 
         (block_row, block_col, block_y, block_x) = blockArray.shape
 

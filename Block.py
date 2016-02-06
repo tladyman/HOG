@@ -1,3 +1,4 @@
+import numpy as np
 from scipy import misc
 from skimage.util import view_as_windows
 from Cell import Cell
