@@ -41,6 +41,9 @@ class Hog:
 
         # Check if cell shape is compatible with blocks if not raise error
 
+        # Calculate gradient and magnitude arrays and then create Blocks for each of them
+
+        # Create histogram object - which takes the Block array and 
 
 
     def _create_gradient_images(self,pixelArray):

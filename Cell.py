@@ -1,13 +1,13 @@
 from scipy import misc
-from Histogram import Histogram
 from skimage.util import view_as_blocks
+from Histogram import Histogram
 
 
 class Cell:
-    """A container object to manage the cells. These are squares of pixels.
+    """A container object to manage the cells. These are rectangles of pixels.
 
     Attributes:
-        _pixelArray (numpy.ndarray): The arrays of pixels.
+        _blockArray (numpy.ndarray): The arrays of pixels.
         cellArray: The array of cells to have 
     """
 
@@ -21,7 +21,7 @@ class Cell:
             cellSizeX: The number of pixels on the x axis of this Cell.
             cellSizeY: The number of pixels on the y axis of this Cell.
         """
-        self._block = blockArray
+        self._blockArray = The array of blocks
 
         (block_row, block_col, block_y, block_x) = blockArray.shape
 
@@ -35,12 +35,9 @@ class Cell:
 
         cellArray = np.zeros((dim1, dim2, cellSizeY, cellSizeX))
 
-        cell_list = []
-
         for i, row in enumerate(blockArray):
             for j, col in enumerate(row):
                 cell = view_as_blocks(col, (cellSizeY, cellSizeX))
-                cell_list.append(cell)
                 to_add_y = cell_row * i
                 to_add_x = cell_col * j
 
@@ -49,9 +46,9 @@ class Cell:
                         # position to put the cell into
                         y_position = k + to_add_y
                         x_position = l + to_add_x
-                        print((y_position, x_position))
+
                         # put cell into cellArray
                         cellArray[y_position, x_position,: ,:] = cCol
 
-        self.cellArray = 
+        self.cellArray = cellArray
 

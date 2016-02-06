@@ -1,4 +1,5 @@
 from scipy import misc
+from skimage.util import view_as_windows
 from Cell import Cell
 
 
@@ -32,13 +33,22 @@ class Block:
         """
         self._pixelArray = pixelArray
 
-        # Create the cells and store in a 2D array/list in this object
-        # Calculate step from overlap and block size
-        # NB This will be calculated as the minimum of either the x or y steps
-        step_x = floor(overlap * blockSizeX)
-        step_y = floor(overlap * blockSizeY)
+        # if we want no overlap then overlap = 0 but need to alter so that
+        # step isn't zero and is the maximum of the blockSize
+        if overlap == 0:
+            step = max(blockSizeY, blockSizeX)
+        else:
+            # Calculate step from overlap and block size
+            # NB This will be calculated as the minimum of either the x or y steps
+            step_x = floor(overlap * blockSizeX)
+            step_y = floor(overlap * blockSizeY)
+            step = min(step_x, step_y)
 
-        step = min(step_x, step_y)
         block_shape = (blockSizeY, blockSizeX)
 
         self.blockArray = view_as_windows(pixelArray, block_shape, step)
+
+        # Create cell object
+        cell = Cell(self.blockArray, cellSizeX, cellSizeY)
+
+        self.cellArray = cell.cellArray
