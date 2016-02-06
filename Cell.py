@@ -14,10 +14,10 @@ class Cell:
     histogram = Histogram()
 
     def __init__(self, blockArray, cellSizeX, cellSizeY):
-        """Constructor from an input array, this should be a block object. Array should be 2x2 etc.
+        """Constructor from an input array, this should be a block object.
 
         Args:
-            blockArray: The array of blocks
+            blockArray: The array of blocks, should be two dimensional.
             cellSizeX: The number of pixels on the x axis of this Cell.
             cellSizeY: The number of pixels on the y axis of this Cell.
         """
@@ -27,13 +27,13 @@ class Cell:
 
         cell_shape = (cellSizeY, cellSizeX)
 
-        dim1 = block_row * cellSizeY
-        dim2 = block_col * cellSizeX
-
-        cellArray = np.zeros((dim1, dim2, cellSizeY, cellSizeX))
-
         practice = view_as_blocks(blockArray[0,0], cell_shape)
         (cell_row, cell_col, cell_y, cell_x) = practice.shape
+
+        dim1 = block_row * cell_row
+        dim2 = block_col * cell_col
+
+        cellArray = np.zeros((dim1, dim2, cellSizeY, cellSizeX))
 
         cell_list = []
 
@@ -50,6 +50,8 @@ class Cell:
                         y_position = k + to_add_y
                         x_position = l + to_add_x
                         print((y_position, x_position))
+                        # put cell into cellArray
+                        cellArray[y_position, x_position,: ,:] = cCol
 
         self.cellArray = 
 
