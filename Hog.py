@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from scipy import ndimage
 from scipy import misc
 from skimage.util import view_as_windows
+from Block import Block
 
 
 class Hog:
@@ -10,15 +11,18 @@ class Hog:
 
     Attributes:
         _inputImage (numpy.ndarray): The raw unprocessed input image.
-
+        grad
+        mag
+        gradBlock
+        magBlock
     """
 
-    def __init__(self, filename, blockSizeX, blockSizeY, overlap, cellSizeX, cellSizeY):
+    def __init__(self, filename, blockSizeX, blockSizeY, overlap, cellSizeX, cellSizeY, oBins):
         """Constructor from an input image.
 
         Args:
             filename: Filename of input image e.g. 'test.png'. 
-                It also takes a numpy array
+                It can also takes a numpy array
             blockSizeX: The number of cells on the x axis of the Blocks. The
                 size in pixels is blockSizeX*cellSizeX
             blockSizeY: The number of cells on the y axis of the Blocks. The
@@ -33,17 +37,24 @@ class Hog:
         if type(filename) == str:
             # load the image
             self._inputImage = misc.imread(filename)
-        else:
+        elif type(filename) == np.ndarray:
             self._inputImage = filename
+        else:
+            raise TypeError("That is not a valid input")
 
         # plt.imshow(self._inputImage, cmap=plt.cm.gray, interpolation="nearest")
         # plt.show()
 
-        # Check if cell shape is compatible with blocks if not raise error
-
         # Calculate gradient and magnitude arrays and then create Blocks for each of them
+        gx, gy = self._create_gradient_images(self._inputImage)
 
-        # Create histogram object - which takes the Block array and 
+        # Create block objects for each the magnitude and gradient images.
+        self.gradBlock = Block(self.grad, blockSizeX, blockSizeY, overlap, cellSizeX, cellSizeY)
+        self.magBlock = Block(self.mag, blockSizeX, blockSizeY, overlap, cellSizeX, cellSizeY)
+
+        # Create histogram object - which takes the gradient Block object and the 
+        # magnitude Block object
+        histogram = Histogram(gradBlock, magBlock, oBins)
 
 
     def _create_gradient_images(self,pixelArray):
@@ -69,7 +80,6 @@ class Hog:
         # The array is then restored to its original dimensions.
 
         # Convolve the vectors to create gradients in x and y directions
-
         gx = ndimage.filters.convolve(pixelArray, row, mode = "constant")
         gy = ndimage.filters.convolve(pixelArray, column, mode = "constant")
 
@@ -80,5 +90,3 @@ class Hog:
         self.mag = np.sqrt(gx**2 + gy**2)
 
         return gx, gy
-
-        # Create the Blocks and store in a 2D array/list in this object
