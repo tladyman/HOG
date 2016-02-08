@@ -53,6 +53,6 @@ class Block:
         self.blockArray = view_as_windows(pixelArray, block_shape, step)
 
         # Create cell object
-        cell = Cell(self.blockArray, cellSizeX, cellSizeY)
+        self.cell = Cell(self.blockArray, cellSizeX, cellSizeY)
 
-        self.cellArray = cell.cellArray
+        self.cellArray = self.cell.cellArray

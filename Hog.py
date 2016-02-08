@@ -34,6 +34,7 @@ class Hog:
                 this Block.
             cellSizeY: The number of pixels on the y axis of the Cells within
                 this Block.
+            oBins: Number of orientation bins
 
         """
         if type(filename) == str:
@@ -56,7 +57,9 @@ class Hog:
 
         # Create histogram object - which takes the gradient Block object and the 
         # magnitude Block object
-        histogram = Histogram(self.gradBlock, self.magBlock, oBins)
+        self.histogram = Histogram(self.gradBlock, self.magBlock, oBins)
+
+        self.output = self.histogram.histArray
 
 
     def _create_gradient_images(self,pixelArray):

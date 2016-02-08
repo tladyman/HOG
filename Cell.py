@@ -34,6 +34,12 @@ class Cell:
         dim2 = block_col * cell_col
 
         cellArray = np.zeros((dim1, dim2, cellSizeY, cellSizeX))
+        # Create a positional array to show which cells belonged to which block.
+        # The blockNum is on a grid like below.
+        # 1 2 3 4 5
+        # 6 7 8 9 10
+        blockPosition = np.zeros((dim1,dim2))
+        blockNum = 0
 
         for i, row in enumerate(blockArray):
             for j, col in enumerate(row):
@@ -49,6 +55,9 @@ class Cell:
 
                         # put cell into cellArray
                         cellArray[y_position, x_position,: ,:] = cCol
+                        blockPosition[y_position, x_position] = blockNum
+                blockNum += 1
 
         self.cellArray = cellArray
+        self.blockPosition = blockPosition
 
