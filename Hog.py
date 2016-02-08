@@ -4,6 +4,8 @@ from scipy import ndimage
 from scipy import misc
 from skimage.util import view_as_windows
 from Block import Block
+from Histogram import Histogram
+from Cell import Cell
 
 
 class Hog:
@@ -54,7 +56,7 @@ class Hog:
 
         # Create histogram object - which takes the gradient Block object and the 
         # magnitude Block object
-        histogram = Histogram(gradBlock, magBlock, oBins)
+        histogram = Histogram(self.gradBlock, self.magBlock, oBins)
 
 
     def _create_gradient_images(self,pixelArray):

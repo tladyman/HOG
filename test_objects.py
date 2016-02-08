@@ -1,8 +1,11 @@
-from Hog import Hog
-from Cell import Cell
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import ndimage
+from scipy import misc
+from skimage.util import view_as_windows, view_as_blocks
 from Block import Block
 from Histogram import Histogram
-import numpy as np
+from Cell import Cell
 
 test_holes_image = np.array([[0,0,0,0,0,0,1,0,0,0],
                              [0,1,1,1,1,1,0,0,0,0],

@@ -1,4 +1,8 @@
 import numpy as np
+import matplotlib.pyplot as plt
+from scipy import ndimage
+from scipy import misc
+from skimage.util import view_as_windows, view_as_blocks
 
 class Histogram:
     """The histogram and associated methods.

@@ -1,6 +1,8 @@
 import numpy as np
+import matplotlib.pyplot as plt
+from scipy import ndimage
 from scipy import misc
-from skimage.util import view_as_windows
+from skimage.util import view_as_windows, view_as_blocks
 from Cell import Cell
 
 
@@ -42,8 +44,8 @@ class Block:
         else:
             # Calculate step from overlap and block size
             # NB This will be calculated as the minimum of either the x or y steps
-            step_x = floor(overlap * blockSizeX)
-            step_y = floor(overlap * blockSizeY)
+            step_x = np.floor(overlap * blockSizeX)
+            step_y = np.floor(overlap * blockSizeY)
             step = min(step_x, step_y)
 
         block_shape = (blockSizeY, blockSizeX)
