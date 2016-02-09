@@ -97,7 +97,7 @@ class Histogram:
         # Might be sensible to put the accumulator as a (dim1 * dim2, oBins)
         # shaped array, so each row is a histogram
 
-        acc_reshaped = accumulator.reshape(dim1 * dim2, oBins)
+        # acc_reshaped = accumulator.reshape(dim1 * dim2, oBins)
 
-        self.histArray = acc_reshaped
+        self.histArray = accumulator
 
