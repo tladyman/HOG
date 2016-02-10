@@ -6,6 +6,7 @@ from skimage.util import view_as_windows
 from Block import Block
 from Histogram import Histogram
 from Cell import Cell
+from HistogramPlotter import HistogramPlotter
 
 
 class Hog:
@@ -23,7 +24,7 @@ class Hog:
         """Constructor from an input image.
 
         Args:
-            filename: Filename of input image e.g. 'test.png'. 
+            filename: Filename of input image e.g. 'test.png'.
                 It can also takes a numpy array
             blockSizeX: The number of cells on the x axis of the Blocks. The
                 size in pixels is blockSizeX*cellSizeX
@@ -55,11 +56,15 @@ class Hog:
         self.gradBlock = Block(self.grad, blockSizeX, blockSizeY, overlap, cellSizeX, cellSizeY)
         self.magBlock = Block(self.mag, blockSizeX, blockSizeY, overlap, cellSizeX, cellSizeY)
 
-        # Create histogram object - which takes the gradient Block object and the 
+        # Create histogram object - which takes the gradient Block object and the
         # magnitude Block object
         self.histogram = Histogram(self.gradBlock, self.magBlock, oBins)
 
         self.output = self.histogram.histArray
+
+        # Draw an output
+        self.histogramPlotter = HistogramPlotter(self._inputImage, self.output)
+        self.histogramPlotter.plot()
 
 
     def _create_gradient_images(self,pixelArray):
@@ -69,7 +74,7 @@ class Hog:
             pixelArray: The array of pixels
 
         Returns:
-            grad: gradient image 
+            grad: gradient image
             mag: gradient in the y direction
         """
 
@@ -81,10 +86,11 @@ class Hog:
         row = ker.reshape((1,3))
 
         # mode = constant ensures that the edges of the image ar padded with
-        # constant values in this case the default is 0 - perfect for our purposes. 
+        # constant values in this case the default is 0 - perfect for our purposes.
         # The array is then restored to its original dimensions.
 
         # Convolve the vectors to create gradients in x and y directions
+        #TODO: for colour images: np.array([row, row, row])
         gx = ndimage.filters.convolve(pixelArray, row, mode = "constant")
         gy = ndimage.filters.convolve(pixelArray, column, mode = "constant")
 
