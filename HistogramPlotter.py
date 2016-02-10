@@ -50,7 +50,7 @@ class HistogramPlotter:
                         maxValue = thisValue
                         maxIndex = z
                 # Draw the line
-                self.drawLine(xPos,yPos,20*maxIndex, 4, 1)
+                self.drawLine(xPos,yPos,20*maxIndex, 2, 1)
                 # Move the x position to the next centre
                 xPos += xStep
             # Move the y position to the next row
