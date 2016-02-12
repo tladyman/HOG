@@ -1,4 +1,4 @@
-# hog setup
+# Histogram of Oriented Gradients setup
 
 
 Installing Python
