@@ -16,7 +16,7 @@ Running HOG
 
 To run the function run_hybrid:
 * Load your command prompt (cmd in Windows, terminal in Mac and Linux).
-* Change the directory to the one where hybrid_image.py is located.
+* Change the directory to the one where main.py is located (as well as Block.py, Cell.py, etc.).
 * Either make sure your images are also in this folder, or in the command
   give the full filepath as well as the image name.
 * Type the following command into the command prompt:
