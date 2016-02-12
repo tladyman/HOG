@@ -1,0 +1,9 @@
+#
+# ELEC6024 submission definition
+#
+# # are comments
+# Put your details on lines 7, 8 and 9 after the ':'
+[Talk]
+Name: Olivia Wilson, Tom Ladyman
+Title: Histogram of Oriented Gradients.
+Group: B5
