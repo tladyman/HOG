@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from scipy import ndimage
 from scipy import misc
 from skimage.draw import line_aa
+from skimage.draw import line
 import math
 
 from Histogram import Histogram
@@ -79,6 +80,7 @@ class HistogramPlotter:
         stopy = math.floor(centerY + yOffset)
         # Draw the line onto the array
         rr, cc, val = line_aa(starty, startx, stopy, stopx)
+        #rr, cc = line(starty, startx, stopy, stopx)
         self._outputImage[rr, cc] = colour * 255
 
     def getOutput(self):
